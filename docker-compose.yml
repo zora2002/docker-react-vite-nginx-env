@@ -1,0 +1,21 @@
+version: '3'
+services:
+  # QA 環境
+  my-react-qa:
+    image: my-react:latest
+    container_name: my-react-qa
+    restart: always
+    ports:
+      - 3030:80
+    env_file:
+      - .env.docker-compose.qa
+  # 正式環境
+  my-react-prod:
+    image: my-react:latest
+    container_name: my-react-prod
+    restart: always
+    environment:
+      - APP_DOCKER_API_URL=https://prod.prod.prod
+      - APP_DOCKER_TITLE=PROD
+    ports:
+      - 3031:80
